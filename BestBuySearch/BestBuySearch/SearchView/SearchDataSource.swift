@@ -43,7 +43,10 @@ final class SearchDataSource: SearchDataSourceType {
             .dropFirst()
             .debounce(for: 0.5, scheduler: DispatchQueue.main)
             .removeDuplicates()
-            .sink { [unowned self] searchText in
+            .sink { [weak self] searchText in
+                guard let self = self else {
+                    return
+                }
                 self.searchResult = .placeholder
                 guard !searchText.isEmpty else {
                     return
@@ -58,20 +61,26 @@ final class SearchDataSource: SearchDataSourceType {
         BestBuyService.search(for: searchText, cursorMark: searchResult.nextCursorMark)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] result in
-                self?.isSearching = false
+                guard let self = self else {
+                    return
+                }
+                self.isSearching = false
                 switch result {
                 case .failure(let error):
-                    self?.searchResult = .placeholder
-                    self?.error = error
+                    self.searchResult = .placeholder
+                    self.error = error
                 case .finished:
                     break
                 }
             } receiveValue: { [weak self] result in
-                self?.searchResult = result
+                guard let self = self else {
+                    return
+                }
+                self.searchResult = result
                 if replaceProducts {
-                    self?.products = result.products
+                    self.products = result.products
                 } else {
-                    self?.products.append(contentsOf: result.products)
+                    self.products.append(contentsOf: result.products)
                 }
             }
             .store(in: &tokens)
