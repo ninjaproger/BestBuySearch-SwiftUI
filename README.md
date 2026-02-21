@@ -82,5 +82,5 @@ To run the tests:
 <p align="center">
   <img src="https://user-images.githubusercontent.com/1210247/148166087-21844775-ec4a-48db-ba80-c29a2998be69.png" width="30%">
   <img src="https://user-images.githubusercontent.com/1210247/148166106-45b5f6e7-5a7d-4b9d-b248-c4cb1bba007f.png" width="30%">
-  <img src="https://user-images.githubusercontent.com/1210247/148166112-c2e324f7-c2e324f7-c2e324f7-c2e324f7-c2e324f7.png" width="30%">
+  <img src="https://user-images.githubusercontent.com/1210247/148166112-c2e324f7-23af-45b1-ae3d-0359ac726633.png" width="30%">
 </p>
